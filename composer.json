@@ -1,0 +1,26 @@
+{
+    "name": "kudryavtsev/quick-sorter",
+    "description": "Implement quick sotr algorithm without recursion error",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Kudryavtsev Maxim",
+            "email": "admin@k-maxim.ru"
+        }
+    ],
+    "require": {
+        "php": "^5.4"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.0"
+    },
+    "autoload": {
+        "classmap": ["src/quick-sorter.php"]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/quick-sorter-test.php"
+        ]
+    }
+}
