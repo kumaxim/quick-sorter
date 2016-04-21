@@ -40,7 +40,7 @@ class QuickSorter
 			$this->pivot  = $this->pickupPivotValue();
 		}
 
-		dump($this);
+//		dump($this);
 	}
 
 	public function sort()
@@ -83,6 +83,61 @@ class QuickSorter
 		$this->collection = array_merge($leftSide, $rightSide);
 
 		return $this->collection;
+	}
+
+
+	/**
+	 * Selection sort algorithm use for short collection, that have less than 30 elements
+	 *
+	 * @return array Sorted collection
+	 */
+	public function selectionSort()
+	{
+		for ($currentPosition = 0; $currentPosition < $this->length; $currentPosition++) {
+			$leadingPosition = $currentPosition;
+
+
+			for ($desirePosition = $currentPosition + 1; $desirePosition < $this->length; $desirePosition++) {
+				if ($this->compare($desirePosition, $leadingPosition)) {
+					$leadingPosition = $desirePosition;
+				}
+			}
+
+			if ($leadingPosition !== $currentPosition) {
+				$this->swap($currentPosition, $leadingPosition);
+			}
+		}
+
+		return $this->collection;
+	}
+
+	/**
+	 * Compare two element in collection
+	 *
+	 * @param int $source Index of first element
+	 * @param int $destination Index of second element
+	 *
+	 * @return bool True if value's first element less or equal then value's second element. Otherwise false
+	 */
+	private function compare($source, $destination)
+	{
+		if (($source < 0) || ($destination < 0)) {
+			throw new RuntimeException(
+				'One of index less then zero. It is value: ' .
+			    sprintf('source => %s; destination => %s', $source, $destination)
+			);
+		}
+
+		if ($this->collection[$source] <= $this->collection[$destination]) {
+			return true;
+		}
+
+		return false;
+	}
+
+	private function heap()
+	{
+
 	}
 
 	/**

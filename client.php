@@ -31,7 +31,7 @@ $collection = [
 //$source = fill();
 dump($collection);
 
-$sorter = new QuickSort($collection);
-$sorted = $sorter->sort();
+$sorter = new QuickSorter($collection);
+$sorted = $sorter->selectionSort();
 
 dump($sorted);
