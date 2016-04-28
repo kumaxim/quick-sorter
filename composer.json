@@ -16,11 +16,14 @@
         "symfony/var-dumper": "^3.0"
     },
     "autoload": {
-        "classmap": ["src/quick-sorter.php"]
+        "psr-4": {
+            "KuMaxim\\SortingAlgorithm\\" : "src/",
+            "KuMaxim\\Example\\" : "cases/"
+        }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/quick-sorter-test.php"
-        ]
+        "psr-4": {
+            "KuMaxim\\Test\\" : "tests/"
+        }
     }
 }
