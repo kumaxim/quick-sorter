@@ -6,85 +6,41 @@
 
 namespace KuMaxim\SortingAlgorithm;
 
+use KuMaxim\SortingAlgorithm\Preset\AbstractSet;
+
 /**
  * Class SelectionSort
  * @package KuMaxim\SortingAlgorithm
  */
-abstract class SelectionSort implements Algorithm
+class SelectionSort implements Algorithm
 {
     /**
-     * @var array
-     */
-    protected $collection = [];
-
-    /**
-     * @var int
-     */
-    protected $length;
-
-    /**
-     * @param array $unsorted
-     */
-    public function __construct(array $unsorted)
-    {
-        $this->collection = $this->sanitize($unsorted);
-        $this->length = count($this->collection);
-    }
-
-    /**
+     * @param AbstractSet $dataSet
      * @param string $direction
      * @return array
      */
-    public function sort($direction = 'asc')
+    public static function sort(AbstractSet $dataSet, $direction = 'asc')
     {
+        // Simple validation sorting trend
         $direction = ($direction !== 'desc') ? 'asc' : 'desc';
 
-        for ($currentPosition = 0; $currentPosition < $this->length; $currentPosition++) {
+        for ($currentPosition = 0; $currentPosition < $dataSet->getLength(); $currentPosition++) {
             $leadingPosition = $currentPosition;
 
-            for ($desirePosition = $currentPosition + 1; $desirePosition < $this->length; $desirePosition++) {
-                if ($this->compare($desirePosition, $leadingPosition, $direction)) {
-                    $leadingPosition = $desirePosition;
-                }
+            for ($desirePosition = $currentPosition + 1; $desirePosition < $dataSet->getLength(); $desirePosition++) {
+                $resultCompare = $dataSet->compare($desirePosition, $leadingPosition);
+                $trend = ($direction === 'asc') ? $resultCompare : !$resultCompare;
+
+                $leadingPosition = ($trend) ? $desirePosition : $leadingPosition;
             }
 
             if ($leadingPosition !== $currentPosition) {
-                $this->swap($currentPosition, $leadingPosition);
+                $dataSet->swap($currentPosition, $leadingPosition);
             }
         }
 
-        return $this->collection;
+        return $dataSet->getCollection();
     }
 
-    /**
-     * @param array $unsafe
-     * @throws \Exception
-     * @return array
-     */
-    private function sanitize(array $unsafe)
-    {
-        return array_filter($unsafe, [$this, 'healthyItem']);
-    }
 
-    /**
-     * @param mixed $item
-     * @return mixed
-     */
-    abstract protected function healthyItem($item);
-
-    /**
-     * @param int $source
-     * @param int $destination
-     *
-     * @return void
-     */
-    abstract protected function swap($source, $destination);
-
-    /**
-     * @param mixed $source
-     * @param mixed $destination
-     *
-     * @return bool
-     */
-    abstract protected function compare($source, $destination, $direction);
 }

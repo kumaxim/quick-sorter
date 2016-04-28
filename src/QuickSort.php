@@ -2,7 +2,7 @@
 
 namespace KuMaxim\SortingAlgorithm;
 
-class QuickSort
+class QuickSort implements Algorithm
 {
 	/**
 	 * Left border

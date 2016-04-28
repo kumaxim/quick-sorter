@@ -1,19 +1,23 @@
 <?php
 /**
  * @author Kudryavtsev Maxim
- * @date 25.04.16
+ * @date 01.05.16
  */
 
-namespace KuMaxim\Test\SelectionSort;
+namespace KuMaxim\Test;
 
-use KuMaxim\Example\SelectionSort\IntegerSorter;
+use KuMaxim\Implementation\BaseSorter;
 
-class SelectionSortIntegerTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractIntegerTester extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @return array
-     */
-    public function sequenceProvider()
+    private $sorter = null;
+
+    protected function sorterSet(BaseSorter $sortImplementation)
+    {
+        $this->sorter = $sortImplementation;
+    }
+
+    public function numSequenceProvider()
     {
         return [
             [[6, 21, 7, 13, 17, 20, 1, 4, 18, 9,]],
@@ -26,12 +30,11 @@ class SelectionSortIntegerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $sequence
-     * @dataProvider sequenceProvider
+     * @dataProvider numSequenceProvider
      */
     public function testSortInASC(array $sequence)
     {
-        $sorter = new IntegerSorter($sequence);
-        $sortedSequence = $sorter->sort();
+        $sortedSequence = $this->sorter->sort($sequence, 'asc');
 
         $prev = key($sortedSequence);
 
@@ -43,12 +46,11 @@ class SelectionSortIntegerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $sequence
-     * @dataProvider sequenceProvider
+     * @dataProvider numSequenceProvider
      */
     public function testSortInDESC(array $sequence)
     {
-        $sorter = new IntegerSorter($sequence);
-        $sortedSequence = $sorter->sort('desc');
+        $sortedSequence = $this->sorter->sort($sequence, 'desc');
 
         $prev = key($sortedSequence);
 

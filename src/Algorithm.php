@@ -5,7 +5,13 @@
 
 namespace KuMaxim\SortingAlgorithm;
 
+use KuMaxim\SortingAlgorithm\Preset\AbstractSet;
+
+/**
+ * Interface Algorithm
+ * @package KuMaxim\SortingAlgorithm
+ */
 interface Algorithm
 {
-    public function sort();
+    public static function sort(AbstractSet $dataSet);
 }

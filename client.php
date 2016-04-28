@@ -31,7 +31,7 @@ $collection = [
 //$source = fill();
 dump($collection);
 
-$sorter = new KuMaxim\Example\SelectionSort\IntegerSorter($collection);
+$sorter = new \KuMaxim\Implementation\IntegerSelectionSorter($collection);
 $sorted = $sorter->sort();
 
 dump($sorted);

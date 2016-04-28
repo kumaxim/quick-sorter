@@ -6,19 +6,20 @@
     "authors": [
         {
             "name": "Kudryavtsev Maxim",
-            "email": "admin@k-maxim.ru"
+            "email": "kumaxim@users.noreply.github.com"
         }
     ],
     "require": {
         "php": "^5.4"
     },
     "require-dev": {
-        "symfony/var-dumper": "^3.0"
+        "symfony/var-dumper": "^3.0",
+        "phpunit/phpunit": "5.3.2"
     },
     "autoload": {
         "psr-4": {
             "KuMaxim\\SortingAlgorithm\\" : "src/",
-            "KuMaxim\\Example\\" : "cases/"
+            "KuMaxim\\Implementation\\" : "example//"
         }
     },
     "autoload-dev": {
